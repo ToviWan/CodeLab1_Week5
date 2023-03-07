@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class ObjectVisibility : MonoBehaviour
 {
-    public GameObject indicatorPrefab;
+    //GameObject indicatorPrefab;
     private GameObject indicator;
     private Camera mainCamera;
+    private Canvas canvas;
+    //private bool readPosition;
 
     void Start()
     {
         // Create the indicator and set its parent to the Canvas
-        Canvas canvas = FindObjectOfType<Canvas>(); // Find the Canvas object in the scene
+        canvas = FindObjectOfType<Canvas>(); // Find the Canvas object in the scene
         if (canvas != null)
         {
-            indicator = Instantiate(indicatorPrefab, canvas.transform); // Instantiate the indicator prefab and set its parent to the Canvas
+            //indicator = Instantiate(indicatorPrefab, canvas.transform); // Instantiate the indicator prefab and set its parent to the Canvas
+            indicator = canvas.transform.GetChild(0).gameObject;
             indicator.SetActive(false); // Hide the indicator by default
         }
 
@@ -24,9 +27,12 @@ public class ObjectVisibility : MonoBehaviour
 
     void Update()
     {
+       
         // Check if the object is out of view
         if (!IsInView())
         {
+            
+
             // Show the indicator
             if (indicator != null)
             {
